@@ -36,16 +36,34 @@ func main() {
 	defer glfw.Terminate()
 
 	glfw.WindowHint(glfw.Resizable, glfw.False)
-	glfw.WindowHint(glfw.ContextVersionMajor, 4)
-	glfw.WindowHint(glfw.ContextVersionMinor, 1)
+	glfw.WindowHint(glfw.ContextVersionMajor, 3)
+	glfw.WindowHint(glfw.ContextVersionMinor, 2)
 	glfw.WindowHint(glfw.OpenGLProfile, glfw.OpenGLCoreProfile)
 	glfw.WindowHint(glfw.OpenGLForwardCompatible, glfw.True)
+	fmt.Println("before")
 	window, err := glfw.CreateWindow(windowWidth, windowHeight, "Cube", nil, nil)
+	if err != nil {
+		fmt.Println("not3.2")
+		glfw.WindowHint(glfw.ContextVersionMajor, 3)
+		glfw.WindowHint(glfw.ContextVersionMinor, 0)
+		glfw.WindowHint(glfw.OpenGLProfile, glfw.OpenGLAnyProfile)
+		window, err = glfw.CreateWindow(windowWidth, windowHeight, "Cube", nil, nil)
+	}
+	
+	if err != nil {
+		fmt.Println("not3.0")
+		glfw.DefaultWindowHints()
+		glfw.WindowHint(glfw.Resizable, glfw.False)
+		glfw.WindowHint(glfw.ContextVersionMajor, 2)
+		glfw.WindowHint(glfw.ContextVersionMinor, 1)
+		window, err = glfw.CreateWindow(windowWidth, windowHeight, "Cube", nil, nil)
+		
+	}
 	if err != nil {
 		panic(err)
 	}
 	window.MakeContextCurrent()
-
+	fmt.Println("AFTER")
 	// Initialize Glow
 	if err := gl.Init(); err != nil {
 		panic(err)
