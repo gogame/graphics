@@ -7,7 +7,12 @@ import (
 
 	"github.com/go-gl/gl/v3.2-core/gl"
 	"github.com/go-gl/glfw/v3.2/glfw"
+	"github.com/gogame/graphics"
 )
+
+//display = taille du buffer dans lequel on ecrit
+// à un scale et  fct scale to screen pour configurer automtiquement
+//screen = taille relle de l'écran, le display est scallé par rapport à l'écran sauf si display avec scale spécifié
 
 func init() {
 	// GLFW event handling must run on the main OS thread
@@ -15,6 +20,8 @@ func init() {
 }
 
 func main() {
+	d := graphics.NewDisplay(320, 200)
+	d.Close()
 	if err := glfw.Init(); err != nil {
 		log.Fatalln("failed to initialize glfw:", err)
 	}
