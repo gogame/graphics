@@ -20,7 +20,7 @@ func init() {
 }
 
 func main() {
-	d := graphics.NewDisplay(320, 200)
+	d := graphics.NewDisplay(320, 200, 2)
 	d.Close()
 	if err := glfw.Init(); err != nil {
 		log.Fatalln("failed to initialize glfw:", err)
