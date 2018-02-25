@@ -115,7 +115,13 @@ func setupScene() {
 	gl.Lightfv(gl.LIGHT0, gl.DIFFUSE, &diffuse[0])
 	gl.Lightfv(gl.LIGHT0, gl.POSITION, &lightPosition[0])
 	gl.Enable(gl.LIGHT0)
-
+/*
+glViewport(0,0,width,height);
+glMatrixMode(GL_PROJECTION);
+glLoadIdentity();
+glOrtho(0,width,0,height,-1,1);
+glMatrixMode(GL_MODELVIEW);
+*/
 	gl.MatrixMode(gl.PROJECTION)
 	gl.LoadIdentity()
 	gl.Frustum(-1, 1, -1, 1, 1.0, 10.0)

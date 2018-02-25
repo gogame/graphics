@@ -1,4 +1,50 @@
+package main
 
+import (
+	"fmt"
+	"log"
+	"runtime"
+
+	"github.com/go-gl/gl/v3.2-core/gl"
+	"github.com/go-gl/glfw/v3.2/glfw"
+)
+
+func init() {
+	// GLFW event handling must run on the main OS thread
+	runtime.LockOSThread()
+}
+
+func main() {
+	if err := glfw.Init(); err != nil {
+		log.Fatalln("failed to initialize glfw:", err)
+	}
+	defer glfw.Terminate()
+
+	glfw.WindowHint(glfw.Resizable, glfw.False)
+	glfw.WindowHint(glfw.ContextVersionMajor, 2)
+	glfw.WindowHint(glfw.ContextVersionMinor, 1)
+	window, err := glfw.CreateWindow(800, 600, "Cube", nil, nil)
+	if err != nil {
+		panic(err)
+	}
+	window.MakeContextCurrent()
+
+	if err := gl.Init(); err != nil {
+		panic(err)
+	}
+
+	fmt.Println(gl.GoStr(gl.GetString(gl.VERSION)))
+
+	//texture = newTexture("square.png")
+	//defer gl.DeleteTextures(1, &texture)
+
+	//setupScene()
+	for !window.ShouldClose() {
+		//drawScene()
+		window.SwapBuffers()
+		glfw.PollEvents()
+	}
+}
 
 /*
 static int mini(int x, int y)
